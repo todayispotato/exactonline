@@ -76,10 +76,9 @@ class HTTPError(request.HTTPError):
         response = response[0:512] + ('', '...')[len(response) > 512]
         response = ''.join(('?', i)[0x20 <= ord(i) <= 0x7F or i in '\t\n\r']
                            for i in response)
-        return ('HTTPError: """%s %s\nContent-Type: %s\n'
-                'Content-Length: %d\n\n%s"""' %
-                (self.code, self.msg, self.hdrs.type, len(self.response),
-                 response))
+        return ('HTTPError: """%s %s\n\n'
+                'Headers:\n%s\n%s"""' %
+                (self.code, self.msg, self.hdrs, response))
 
 
 class Options(object):
