@@ -1,10 +1,11 @@
-Exact Online REST API Library in Python
-=======================================
+Exact Online REST API Library for Python3
+=========================================
 
 Exact Online provides accounting software in a Software-as-a-Service
 delivery model. It implements an API through a REST interface. This
 library aims to ease its use.
 
+This fork implements Python3 support. When it is finished and it still supports Python2, it will be offered as a pull request to the main repo. If I have to break Python2 support I will though.
 
 
 Quick jump

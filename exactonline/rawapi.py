@@ -159,7 +159,7 @@ class ExactRawApi(object):
         #  "token_type":"bearer",
         #  "expires_in":"600",
         #  "refresh_token":"__1P!I.."}
-        decoded = json.loads(jsondata)
+        decoded = json.loads(jsondata.decode())
 
         # Validate the values.
         assert decoded['access_token']
