@@ -79,7 +79,7 @@ class ExactRawApi(object):
                         refresh_params)
 
         # Fire away!
-        url = self.storage.get_refresh_url().encode('utf-8')
+        url = self.storage.get_refresh_url()
         response = http_post(url, refresh_data, opt=opt_secure)
 
         # Validate and store the values.
