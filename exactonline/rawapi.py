@@ -53,7 +53,7 @@ class ExactRawApi(object):
                       token_params)
 
         # Fire away!
-        url = self.storage.get_token_url().encode('utf-8')
+        url = self.storage.get_token_url()
         response = http_post(url, token_data, opt=opt_secure)
 
         # Validate and store the values.

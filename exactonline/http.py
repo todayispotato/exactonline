@@ -8,7 +8,6 @@ Copyright (C) 2015-2016 Walter Doekes, OSSO B.V.
 
 We may want to replace this with something simpler.
 """
-import urllib
 import socket
 import ssl
 import sys
@@ -26,9 +25,9 @@ try:
 except ImportError:  # python2
     import urllib2 as request
 try:
-    from urllib.parse import urljoin, quote
+    from urllib.parse import urljoin, quote, urlencode
 except ImportError:  # python2
-    from urllib import quote
+    from urllib import quote, urlencode
     from urlparse import urljoin
 
 # For older Python, use this. For newer Python, use nothing to get
@@ -224,11 +223,16 @@ def http_post(url, data=None, opt=opt_default):
     Shortcut for urlopen (POST) + read. We'll probably want to add a
     nice timeout here later too.
     '''
-    if isinstance(data, str):
+    if isinstance(data, bytes):
         # Allow binstrings for data.
         pass
+    elif isinstance(data, str):
+        # Python 3 string.
+        data = data.encode('utf-8')
     elif data:
-        data = urllib.urlencode(data)
+        # I believe the author wants to allow you to pass in a list of tuples
+        # here. Unicode Python 2 strings would also get here (and break).
+        data = urlencode(data)
     else:
         data = ''.encode('utf-8')  # ensure POST-mode
     return _http_request(url, method='POST', data=data, opt=opt)
@@ -239,11 +243,16 @@ def http_put(url, data=None, opt=opt_default):
     Shortcut for urlopen (PUT) + read. We'll probably want to add a
     nice timeout here later too.
     '''
-    if isinstance(data, str):
+    if isinstance(data, bytes):
         # Allow binstrings for data.
         pass
+    elif isinstance(data, str):
+        # Python 3 string.
+        data = data.encode('utf-8')
     elif data:
-        data = urllib.urlencode(data)
+        # I believe the author wants to allow you to pass in a list of tuples
+        # here. Unicode Python 2 strings would also get here (and break).
+        data = urlencode(data)
     else:
         data = ''.encode('utf-8')  # ensure POST-mode
     return _http_request(url, method='PUT', data=data, opt=opt)
