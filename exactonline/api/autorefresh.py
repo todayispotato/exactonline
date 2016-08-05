@@ -14,7 +14,7 @@ class Autorefresh(object):
         try:
             decoded = super(Autorefresh, self).rest(method, resource, data=data)
         except HTTPError as e:
-            if e.code != 401:
+            if e.code != 401 or self.storage.get_refresh_token() is None:
                 raise
 
             # Refresh token.

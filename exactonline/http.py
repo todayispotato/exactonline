@@ -77,7 +77,7 @@ class HTTPError(request.HTTPError):
         response = ''.join(('?', i)[0x20 <= ord(i) <= 0x7F or i in '\t\n\r']
                            for i in response)
         return ('HTTPError: """%s %s\n\n'
-                'Headers:\n%s\n%s"""' %
+                'Headers:\n%sContent:\n%s"""' %
                 (self.code, self.msg, self.hdrs, response))
 
 
