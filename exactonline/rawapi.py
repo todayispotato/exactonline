@@ -103,7 +103,7 @@ class ExactRawApi(object):
         response = self._rest_query(method, url, data)
 
         if method in ('DELETE', 'PUT'):
-            if response != '':
+            if not response:
                 raise ValueError('Expected empty data for %s operation: '
                                  'resource=%r, returned=%r' %
                                  (method, resource, response))
